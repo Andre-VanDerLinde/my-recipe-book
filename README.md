@@ -1,4 +1,6 @@
-# 🍽️ My Recipe Book## 📚 Overview
+# 🍽️ My Recipe Book
+
+## 📚 Overview
 
 My Recipe Book is a recipe browser where users can:
 
