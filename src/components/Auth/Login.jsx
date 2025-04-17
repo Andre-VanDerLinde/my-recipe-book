@@ -42,7 +42,7 @@ function Login(){
     return(
         <div className="login">
             <h2>Login</h2>
-            {error && <p>{error}</p>}
+            {error && <div className="error-message">{error}</div>}
             <form onSubmit={handleSubmit}>
                 <label>
                     Username:

@@ -14,9 +14,9 @@ function App() {
     <>
       <div id='nav-bar'>
         <Link to='/'>Home</Link>
+        <Link to='/favorites'>Favorites</Link>
         <Link to='/login'>Login</Link>
         <Link to='/register'>Register</Link>
-        <Link to='/favorites'>Favorites</Link>
       </div>
       
       <div id='main'>

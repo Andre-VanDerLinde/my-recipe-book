@@ -72,31 +72,46 @@ function RecipeId(){
           }   
     }
 
-    return(
+    return (
         <div className="recipe-id">
-            {error ? <p>{error}</p> : 
-                <div className="recipe" key={recipe.idMeal}>
-                    <img
-                        src={recipe.strMealThumb}
-                        alt={recipe.strMeal}
-                        onError={() =>
-                            setBrokenImages((prev) => [...prev, recipe.strMealThumb])
-                        }
-                        width={250}
-                    />
-                    <p>{recipe.strTags}</p>
-                    <h2>{recipe.strMeal}</h2>
-                    <button onClick={() => handleBack()}>Back</button>
-                    {token && (
-                        <button onClick={() => handleFavorite(recipe)}>
-                            {favorites.some((f) => f.idMeal === recipe.idMeal) ? "❤️" : "🤍"}
-                        </button>
-                    )}
+            {error && <div className="error-message">{error}</div>}
 
-                </div>
-            }
+            <img 
+                src={recipe.strMealThumb}
+                alt={recipe.strMeal} 
+                onError={() => setBrokenImages((prev) => [...prev, recipe.strMealThumb])}
+                width={400}
+            />
+
+            <div className="tags">{recipe.strTags}</div>
+
+            <h2>{recipe.strMeal}</h2>
+
+            <div className="buttons">
+                <button onClick={handleBack}>Back</button>
+                {token && (
+                <button onClick={() => handleFavorite(recipe)}>
+                    {favorites.some((f) => f.idMeal === recipe.idMeal) ? "❤️" : "🤍"}
+                </button>
+                )}
+            </div>
+
+            <h3>Ingredients</h3>
+            {recipe.ingredients?.length > 0 ? (
+                <ul>
+                    {recipe.ingredients.map((ingredient, index) => (
+                    <li key={index}>{ingredient}</li>
+                    ))}
+                </ul>
+            ) : (
+                <p>No ingredients listed.</p>
+            )}
+
+
+            <h3>Instructions</h3>
+            <p>{recipe.strInstructions}</p>
         </div>
-    )
+    );      
 }
 
 export default RecipeId

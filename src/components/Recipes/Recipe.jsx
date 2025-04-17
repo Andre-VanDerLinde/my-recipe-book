@@ -75,7 +75,7 @@ function Recipe(){
 
     return(
         <div className="recipe-list">
-            {error ? <p>{error}</p> :
+            {error ? <div className="error-message">{error}</div> :
                 recipes
                 .filter((recipe) => !brokenImages.includes(recipe.strMealThumb))
                 .map((recipe) => (
