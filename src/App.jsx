@@ -6,6 +6,7 @@ import Login from './components/Auth/Login'
 import Register from './components/Auth/Register'
 import { useAuth } from './components/Auth/AuthContext'
 import Favorites from './components/Favorites/Favorites'
+import RecipeId from './components/Recipes/RecipeId'
 
 function App() {
   const { token } = useAuth()
@@ -27,6 +28,7 @@ function App() {
             path='/favorites'
             element={token ? <Favorites/> : <Navigate to="/login"/>}  
           />
+          <Route path='/recipe/:id' element={<RecipeId/>}/>
         </Routes>
       </div>
     </>
