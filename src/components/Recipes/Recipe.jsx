@@ -6,7 +6,7 @@ function Recipe(){
     const [recipes, setRecipes] = useState([])
     const [error, setError] = useState(null)
     const [brokenImages, setBrokenImages] = useState([])
-    const { token } = useAuth()
+    const { favorites, setFavorites, token } = useAuth()
     const navigate = useNavigate()
 
     useEffect(()=>{
@@ -17,20 +17,65 @@ function Recipe(){
                 const result = await response.json()
                 setRecipes(result)
 
-                console.log(result)
+                console.log("Result: ",result)
 
             } catch (error) {
                 setError(error.message)
             }
         }
-        
+
         getRecipes()
+
     }, [])
 
-    const handleFavorite = (recipe) => {
+    useEffect(() => {
+        console.log("Favorites updated:", favorites);
+    }, [favorites]);
+      
 
-    }
-
+    const handleFavorite = async (recipe) => {
+        try {
+          // Find if this recipe is already a favorite
+          const currentFavorite = favorites.find(f => f.idMeal === recipe.idMeal);
+      
+          if (currentFavorite) {
+            // DELETE favorite
+            await fetch(`https://fsa-recipe.up.railway.app/api/favorites/${currentFavorite.id}`, {
+              method: "DELETE",
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+      
+            // Remove from state
+            setFavorites(prev => prev.filter(f => f.id !== currentFavorite.id));
+          } else {
+            // POST new favorite
+            const response = await fetch("https://fsa-recipe.up.railway.app/api/favorites", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({
+                mealId: recipe.idMeal,
+                name: recipe.strMeal,
+                imageUrl: recipe.strMealThumb,
+                strArea: recipe.strArea,
+              }),
+            });
+      
+            const result = await response.json();
+      
+            // Append to favorites
+            setFavorites(prev => [...prev, result.data]);
+          }
+        } catch (error) {
+          console.error("Error updating favorites:", error);
+        }
+    };
+      
+ 
     const handleView = (recipe) => {
         navigate(`recipe/${recipe.idMeal}`)
     }
@@ -42,6 +87,7 @@ function Recipe(){
                 .filter((recipe) => !brokenImages.includes(recipe.strMealThumb))
                 .map((recipe) => (
                     <div className="recipe" key={recipe.idMeal}>
+                        
                         <img
                             src={recipe.strMealThumb}
                             alt={recipe.strMeal}
@@ -52,7 +98,14 @@ function Recipe(){
                         />
                         <p>{recipe.strTags}</p>
                         <h2>{recipe.strMeal}</h2>
-                        {token && <button onClick={() => handleFavorite(recipe)}>Favorite</button>}
+                        {/* //if valid user render favorite button
+                        //checks if favorite or not and conditionaly renders text */}
+                        {token && (
+                            <button onClick={() => handleFavorite(recipe)}>
+                                {favorites.some((f) => f.idMeal === recipe.idMeal) ? "❤️" : "🤍"}
+                            </button>
+                        )}
+
                         <button onClick={() => handleView(recipe)}>View</button>
                     </div>
                 )
