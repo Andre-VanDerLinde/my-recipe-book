@@ -53,14 +53,6 @@ All favorites are protected and personalized — only visible to the user who cr
 
 ---
 
-## 🚀 Stretch Goals (Optional Enhancements)
-
-- 🔍 Add a search bar to easily find recipes
-- 🗂️ Filter recipes by location or category
-- 🎲 Generate a random recipe of the day via `/recipes/random`
-
----
-
 ## 🧠 What I Learned
 
 - How to manage global state securely with Context API

@@ -6,7 +6,7 @@ function Login(){
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const {setToken, setUser} = useAuth()
-    const {error, setError} = useState(null)
+    const [error, setError] = useState(null)
     const navigate = useNavigate()
 
     async function handleSubmit(event){
@@ -25,13 +25,14 @@ function Login(){
             const result = await response.json()
 
             if(!response.ok){
-                throw new Error(result.error || "Login Failed")
+                setError(result.message || "Login failed. Please check your credentials")
+                return
             }
 
             setToken(result.token)
             setUser(result.username)
             
-            navigate("/") //jump home after finished
+            navigate("/") //if valid user return home
 
         } catch (error) {
             setError(error.message)

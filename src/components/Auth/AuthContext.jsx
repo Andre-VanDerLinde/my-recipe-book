@@ -47,6 +47,7 @@ export function AuthProvider({children}){
         }
         else{
             localStorage.removeItem("token")
+            setFavorites([]) //clears favorites 
         }
         setTokenState(newToken)
     };

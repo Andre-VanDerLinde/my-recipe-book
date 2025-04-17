@@ -17,8 +17,6 @@ function Recipe(){
                 const result = await response.json()
                 setRecipes(result)
 
-                console.log("Result: ",result)
-
             } catch (error) {
                 setError(error.message)
             }
@@ -27,11 +25,6 @@ function Recipe(){
         getRecipes()
 
     }, [])
-
-    useEffect(() => {
-        console.log("Favorites updated:", favorites);
-    }, [favorites]);
-      
 
     const handleFavorite = async (recipe) => {
         try {
