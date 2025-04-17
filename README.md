@@ -47,8 +47,8 @@ All favorites are protected and personalized — only visible to the user who cr
 ## 📦 Tech Stack
 
 - **Frontend**: React, React Router
-- **Authentication**: JSON Web Tokens (JWT), persisted with `localStorage`
-- **API**: [TheMealDB](https://themealdb.com/api.php) (served via a custom Railway-hosted endpoint)
+- **Authentication**: [Recip App API](https://fsa-recipe.up.railway.app), persisted with `localStorage`
+- **API**: [Recipe App API](https://fsa-recipe.up.railway.app)
 - **State Management**: React Context + Custom `useAuth()` hook
 
 ---
@@ -65,7 +65,7 @@ All favorites are protected and personalized — only visible to the user who cr
 
 - How to manage global state securely with Context API
 - Protecting frontend routes and conditionally rendering UI based on auth
-- Handling async authentication flows using `fetch()` and JWT
+- Handling async authentication flows using `fetch()` and API
 - Structuring a React project for scalability and clarity
 
 ---
