@@ -47,7 +47,7 @@ All favorites are protected and personalized — only visible to the user who cr
 ## 📦 Tech Stack
 
 - **Frontend**: React, React Router
-- **Authentication**: [Recip App API](https://fsa-recipe.up.railway.app), persisted with `localStorage`
+- **Authentication**: [Recipe App API](https://fsa-recipe.up.railway.app), persisted with `localStorage`
 - **API**: [Recipe App API](https://fsa-recipe.up.railway.app)
 - **State Management**: React Context + Custom `useAuth()` hook
 
